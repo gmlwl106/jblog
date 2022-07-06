@@ -8,6 +8,7 @@
 <title>JBlog</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
 
+
 </head>
 <body>
 	<div id="center-content">
@@ -34,12 +35,14 @@
 		      		</tr> 
 		      		<tr>
 		      			<td colspan="2" id="tdMsg" colspan="2">
-		      				<span>아이디 또는 비번을 확인해 주세요.</span>
+		      				<c:if test="${param.result eq 'fail' }">
+		      					<span>아이디 또는 비번을 확인해 주세요.</span>
+		      				</c:if>
 		      			</td>
 		      		</tr> 
 		      	</table>
 	      		<div id="btnArea">
-					<button class="btn" type="submit" >로그인</button>
+					<button class="btn" id="btn" type="submit" >로그인</button>
 				</div>
 	      		
 			</form>
@@ -54,5 +57,6 @@
 	</div>
 	
 </body>
+
 
 </html>

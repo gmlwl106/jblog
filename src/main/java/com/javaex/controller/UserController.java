@@ -1,5 +1,7 @@
 package com.javaex.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +25,20 @@ public class UserController {
 	public String loginForm() {
 		System.out.println("UserController->loginForm()");
 		return "user/loginForm";
+	}
+	
+	//로그인
+	@RequestMapping(value="/login", method= {RequestMethod.GET, RequestMethod.POST})
+	public String login(HttpSession session, @ModelAttribute UserVo userVo) {
+		System.out.println("UserController->login()");
+		UserVo authUser = userService.login(userVo);
+		
+		if(authUser != null) {
+			session.setAttribute("authUser", authUser);
+			return "redirect:/";
+		} else {
+			return "redirect:/user/loginForm?result=fail";
+		}
 	}
 
 	//회원가입 폼

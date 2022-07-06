@@ -12,6 +12,12 @@ public class UserDao {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//회원 가져오기
+	public UserVo getUser(UserVo userVo) {
+		System.out.println("UserDao->getUser()");
+		return sqlSession.selectOne("users.getUser", userVo);
+	}
+	
 	//회원 추가
 	public int userInsert(UserVo userVo) {
 		System.out.println("UserDao->UserInsert()");
