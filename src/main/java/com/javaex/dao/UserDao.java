@@ -17,4 +17,10 @@ public class UserDao {
 		System.out.println("UserDao->UserInsert()");
 		return sqlSession.insert("users.insert", userVo);
 	}
+	
+	//중복 아이디 찾기
+	public UserVo idSelect(String id) {
+		System.out.println("UserDao->idSelect()");
+		return sqlSession.selectOne("users.idSelect", id);
+	}
 }

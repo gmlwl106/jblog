@@ -10,4 +10,13 @@
 			values (seq_users_no.nextval, #{id}, #{userName}, #{password}, sysdate)
 		]]>
 	</insert>
+	
+	<!-- 중복 아이디 찾기 -->
+	<select id="idSelect" parameterType="String" resultType="userVo">
+		<![CDATA[
+			select id
+			from users
+			where id = #{id}
+		]]>
+	</select>
 </mapper>

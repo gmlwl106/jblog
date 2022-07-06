@@ -35,7 +35,7 @@
 		      		</tr>
 		      		<tr>
 		      			<td></td>
-		      			<td id="tdMsg" colspan="2">사용할 수 있는 아이디 입니다.</td>
+		      			<td id="tdMsg" colspan="2"></td>
 		      		</tr> 
 		      		<tr>
 		      			<td><label for="txtPassword">패스워드</label> </td>
@@ -74,8 +74,33 @@
 <script type="text/javascript">
 	
 	/* 아이디 중복 체크 */
-	$("#btnIdCheck").on("click", funtciont() {
+	$("#btnIdCheck").on("click", function() {
+		var id = $("#txtId").val();
+		console.log(id);
 		
+		$.ajax({
+			url : "${pageContext.request.contextPath }/user/idCk",
+			type : "post",
+			//contentType : "application/json",
+			data : {id},
+			//dataType : "json",
+			success : function(result){
+				//성공시 처리해야될 코드 작성
+				console.log(result);
+				if(id != null || id != "") {
+					if(result == "success") {
+						$("#tdMsg").text("사용할 수 있는 아이디입니다.");
+						idCk = 1;
+					} else {
+						$("#tdMsg").text("다른 아이디로 가입해 주세요.");
+					};
+				}
+
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
 		
 	});
 

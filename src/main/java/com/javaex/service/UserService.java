@@ -17,4 +17,16 @@ public class UserService {
 		System.out.println("UserService->join()");
 		return userDao.userInsert(userVo);
 	}
+	
+	//아이디 중복체크
+	public String idCk(String id) {
+		System.out.println("UserService->idCk()");
+		UserVo userVo = userDao.idSelect(id);
+
+		if(userVo == null) {
+			return "success";
+		} else {
+			return "fail";
+		}
+	}
 }
