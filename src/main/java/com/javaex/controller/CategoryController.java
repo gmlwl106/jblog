@@ -23,8 +23,8 @@ public class CategoryController {
 
 	//내블로그 카테고리 관리 폼
 	@RequestMapping(value="/{id}/admin/category", method= {RequestMethod.POST, RequestMethod.GET})
-	public String categoryForm(Model model, @PathVariable String id) {
-		System.out.println("CategoryController->categoryForm()");
+	public String adminCategoryForm(Model model, @PathVariable String id) {
+		System.out.println("CategoryController->adminCategoryForm()");
 		return "blog/admin/blog-admin-cate";
 	}
 	

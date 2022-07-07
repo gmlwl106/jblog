@@ -6,15 +6,17 @@
 	<!-- 카테고리 전체 정보 가져오기 -->
 	<select id="getCateSet" parameterType="String" resultType="cateVo">
 		<![CDATA[
-			select  cateNo
-			        ,cateName
+			select c.cateNo
+			        ,c.cateName
 			        ,description
-			        ,p.count
-			from category, (select count(postNo) count
-			                from category c, post p
-			                where c.cateNo = p.cateNo) p
-			where id = #{id}
-			order by regDate
+			        , p.postCnt
+			from category c, (select cateNo
+			                        ,count(postNo) postCnt
+			                from post
+			                group by cateNo) p
+			where c.cateNo = p.cateNo(+)
+			and c.id = #{id}
+			order by c.regDate
 		]]>
 	</select>
 	
@@ -62,13 +64,14 @@
 		]]>
 	</insert>
 	
-	<!-- (블로그메인) 카테고리 정보 가져오기 -->
+	<!-- (블로그메인, 글쓰기) 카테고리 정보 가져오기 -->
 	<select id="getCategory" parameterType="String" resultType="cateVo">
 		<![CDATA[
 			select  cateNo
 					,cateName
 			from category
 			where id = #{id}
+			order by regDate
 		]]>
 	</select>
 	

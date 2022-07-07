@@ -46,14 +46,10 @@ public class CategoryDao {
 		return sqlSession.insert("category.insert", id);
 	}
 	
-	//(블로그메인) 카테고리 정보 가져오기
+	//(블로그메인, 글쓰기) 카테고리 정보 가져오기
 	public List<CategoryVo> getCategory(String id) {
 		System.out.println("CategoryDao->getCategory()");
 		return sqlSession.selectList("category.getCategory", id);
 	}
-
-	
-
-	
 
 }
