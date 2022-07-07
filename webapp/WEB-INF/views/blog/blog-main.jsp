@@ -21,11 +21,15 @@
 			<div id="profilecate_area">
 				<div id="profile">
 					
-					<!-- 기본이미지 -->
-					<img id="proImg" src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+					<c:if test="${blogMap.blogVo.logoFile == null || blogMap.blogVo.logoFile == '' }">
+						<!-- 기본이미지 -->
+						<img id="proImg" src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+					</c:if>
 					
-					<!-- 사용자업로드 이미지 -->
-					<%-- <img id="proImg" src=""> --%>
+					<c:if test="${blogMap.blogVo.logoFile != null || blogMap.blogVo.logoFile != '' }">
+						<!-- 사용자업로드 이미지 -->
+						<img id="proImg" src="${pageContext.request.contextPath }/upload/${blogMap.blogVo.logoFile }">
+					</c:if>
 					
 					<div id="nick">${blogMap.blogVo.userName }(${blogMap.blogVo.id })</div>
 				</div>
@@ -112,9 +116,10 @@
 		</div>	
 		<!-- //content -->
 		<div class=></div>
+		
+		<!-- 개인블로그 푸터 -->
 		<c:import url="/WEB-INF/views/includes/blog-footer.jsp"></c:import>
 		
-	
 	
 	</div>
 	<!-- //wrap -->

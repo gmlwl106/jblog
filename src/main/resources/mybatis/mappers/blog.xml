@@ -23,4 +23,14 @@
 			and b.id = #{id}
 		]]>
 	</select>
+	
+	<!-- 블로그 정보 수정 -->
+	<update id="update" parameterType="blogVo">
+		<![CDATA[
+			update blog
+			set blogTitle = #{blogTitle}
+				,logoFile = #{logoFile}
+			where id = #{id}
+		]]>
+	</update>
 </mapper>
