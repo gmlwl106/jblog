@@ -3,15 +3,66 @@
 
 <mapper namespace="category">
 
+	<!-- 카테고리 전체 정보 가져오기 -->
+	<select id="getCateSet" parameterType="String" resultType="cateVo">
+		<![CDATA[
+			select  cateNo
+			        ,cateName
+			        ,description
+			        ,p.count
+			from category, (select count(postNo) count
+			                from category c, post p
+			                where c.cateNo = p.cateNo) p
+			where id = #{id}
+			order by regDate
+		]]>
+	</select>
+	
+	<!-- 카테고리 1개 정보 가져오기 -->
+	<select id="getCate" parameterType="int" resultType="cateVo">
+		<![CDATA[
+			select  cateNo
+			        ,cateName
+			        ,description
+			        ,p.count
+			from category, (select count(postNo) count
+			                from category c, post p
+			                where c.cateNo = p.cateNo) p
+			where cateNo = #{cateNo}
+			order by regDate
+		]]>
+	</select>
+	
 	<!-- 카테고리 추가 -->
-	<insert id="insert" parameterType="String">
+	<insert id="cateInsert" parameterType="cateVo">
+		<selectKey keyProperty="cateNo" resultType="int" order="BEFORE">
+			select SEQ_CATEGORY_NO.nextval from dual
+		</selectKey>
 		<![CDATA[
 			insert into category
-			values(seq_category_no.nextval, #{id}, '미분류', '', sysdate)
+			values(#{cateNo}, #{id}, #{cateName}, #{description}, sysdate)
 		]]>
 	</insert>
 	
-	<!-- 카테고리 정보 가져오기 -->
+	<!-- 카테고리 삭제 -->
+	<delete id="delete" parameterType="cateVo">
+		<![CDATA[
+			delete category
+			where cateNo = #{cateNo}
+		]]>
+	</delete>
+	
+	
+
+	<!-- (회원가입) 카테고리 추가 -->
+	<insert id="insert" parameterType="String">
+		<![CDATA[
+			insert into category
+			values(seq_category_no.nextval, #{id}, '미분류', '설명', sysdate)
+		]]>
+	</insert>
+	
+	<!-- (블로그메인) 카테고리 정보 가져오기 -->
 	<select id="getCategory" parameterType="String" resultType="cateVo">
 		<![CDATA[
 			select  cateNo
@@ -20,4 +71,5 @@
 			where id = #{id}
 		]]>
 	</select>
+	
 </mapper>

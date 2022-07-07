@@ -7,19 +7,22 @@ public class CategoryVo {
 	private String cateName;
 	private String description;
 	private String regDate;
+	private int postCnt;
 	
 	
 	public CategoryVo() {
 	}
-	public CategoryVo(int cateNo, String id, String cateName, String description, String regDate) {
+	public CategoryVo(int cateNo, String id, String cateName, String description, String regDate, int postCnt) {
 		this.cateNo = cateNo;
 		this.id = id;
 		this.cateName = cateName;
 		this.description = description;
 		this.regDate = regDate;
+		this.postCnt = postCnt;
 	}
-	
-	
+
+
+
 	public int getCateNo() {
 		return cateNo;
 	}
@@ -50,12 +53,20 @@ public class CategoryVo {
 	public void setRegDate(String regDate) {
 		this.regDate = regDate;
 	}
+	public int getPostCnt() {
+		return postCnt;
+	}
+	public void setPostCnt(int postCnt) {
+		this.postCnt = postCnt;
+	}
 	
 	
 	@Override
 	public String toString() {
 		return "CategoryVo [cateNo=" + cateNo + ", id=" + id + ", cateName=" + cateName + ", description=" + description
-				+ ", regDate=" + regDate + "]";
+				+ ", regDate=" + regDate + ", postCnt=" + postCnt + "]";
 	}
+	
+	
 	
 }
