@@ -67,15 +67,40 @@
 					</c:otherwise>
 				</c:choose>
 				
+				
 				<div id="comment">
-					<table>
+					<c:if test="${not empty authUser }">
+					<table id="cmtWrite">
+						<colgroup>
+							<col style="width: 60px;">
+							<col style="width: 400px;">
+							<col style="width: 60px;">
+						</colgroup>
 						<tr>
 							<td>${authUser.id }</td>
-							<td><input type="text" name="cmt"></td>
-							<td><button id="cmtBtn">저장</button>
+							<td><input type="text" id="cmtTxt" name="cmt"></td>
+							<td><button id="cmtBtn">저장</button></td>
+						</tr>
+					</table>
+					</c:if>
+					
+					<table id="cmtRead">
+						<colgroup>
+							<col style="width: 70px;">
+							<col style="width: 400px;">
+							<col style="width: 50px;">
+							<col style="width: 10px;">
+						</colgroup>
+						<tr>
+							<td>박깜이</td>
+							<td align="left">안녕하세요 반가워요 (^0^)/</td>
+							<td>2022/07/08</td>
+							<td><img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
+							
 						</tr>
 					</table>
 				</div>
+				
 				
 				<div id="list">
 					<div id="listTitle" class="text-left"><strong>카테고리의 글</strong></div>

@@ -179,6 +179,18 @@ div#footer		{ color:#666 }
 #post_area #post					{padding: 20px 10px 20px 10px; border-bottom: 3px solid #808080; text-align: left;}
 
 
+/* 개인블로그 코멘트입력영역 */
+#comment					{padding: 10px 10px 10px 10px;}
+#comment table				{width: 100%; border-collapse: collapse; font-size: 13px;}
+#comment #cmtWrite td		{height: 30px; border: 1px solid #b7b7b7; margin: 0px 0px 0px 0px;}
+#comment #cmtWrite #cmtTxt 	{width: 98%; height: 30px; padding-left: 5px;}
+#comment #cmtWrite #cmtBtn 	{width: 90%; height: 30px;}
+
+
+/* 개인블로그 코멘트영역 */
+#comment #cmtRead td	{padding: 10px 10px 10px 10px;}
+
+
 
 /* 개인블로그 오른쪽영역(글리스트) */
 #post_area {}
