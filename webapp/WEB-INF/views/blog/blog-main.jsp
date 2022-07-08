@@ -78,7 +78,7 @@
 						</colgroup>
 						<tr>
 							<td>${authUser.id }</td>
-							<td><input type="text" id="cmtTxt" name="cmt"></td>
+							<td><input type="text" id="cmtTxt" name="cmtContent"></td>
 							<td><button id="cmtBtn">저장</button></td>
 						</tr>
 					</table>
@@ -96,7 +96,6 @@
 							<td align="left">안녕하세요 반가워요 (^0^)/</td>
 							<td>2022/07/08</td>
 							<td><img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-							
 						</tr>
 					</table>
 				</div>
@@ -135,4 +134,29 @@
 	</div>
 	<!-- //wrap -->
 </body>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		console.log("ready");
+		
+	});
+	
+	
+	/* 코멘트 저장 클릭 */
+	$("#cmtBtn").on("click", function() {
+		console.log("코멘트 저장버튼");
+		
+		var userNo = "${authUser.userNo}";
+		var postNo = "${blogMap.postVo.postNo}";
+		var cmtContent = $("#cmtTxt").val();
+		
+		var commentVo = {
+				userNo: userNo,
+				postNo: postNo,
+				cmtContent: cmtContent
+		};
+		
+		console.log(commentVo);
+	});
+</script>
 </html>
