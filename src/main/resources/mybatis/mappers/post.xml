@@ -10,4 +10,30 @@
 			values(seq_post_no.nextval, #{cateNo}, #{postTitle}, #{postContent}, sysdate)
 		]]>
 	</insert>
+	
+	<!-- (블로그메인) 글 제목 가져오기 -->
+	<select id="getList" parameterType="String" resultType="postVo">
+		select  postNo
+		        ,p.cateNo
+		        ,postTitle
+		        ,to_char(p.regDate, 'YYYY/MM/DD') regDate
+		from blog b, category c, post p
+		where b.id = c.id
+		and c.cateNo = p.cateNo
+		and b.id = #{id}
+		order by p.regDate desc
+	</select>
+	
+	<!-- (블로그메인) 글 1개 가져오기 -->
+	<select id="getPost" parameterType="String" resultType="postVo">
+		select postNo
+		        ,postTitle
+		        ,postContent
+		        ,to_char(regDate, 'YYYY/MM/DD') regDate
+		from post
+		where regDate = (select max(p.regDate)
+		                from post p, category c
+		                where c.cateNo = p.cateNo
+		                and c.id = #{id})
+	</select>
 </mapper>

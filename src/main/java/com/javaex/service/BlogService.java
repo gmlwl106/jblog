@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -15,8 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.javaex.dao.BlogDao;
 import com.javaex.dao.CategoryDao;
+import com.javaex.dao.PostDao;
 import com.javaex.vo.BlogVo;
-import com.javaex.vo.CategoryVo;
 
 @Service
 public class BlogService {
@@ -25,17 +24,19 @@ public class BlogService {
 	private BlogDao blogDao;
 	@Autowired
 	private CategoryDao cateDao;
+	@Autowired
+	private PostDao postDao;
 	
 	//블로그 정보 가져오기 (메인)
 	public Map<String, Object> getBlog(String id) {
 		System.out.println("BlogController->blogMain()");
-		BlogVo headerVo = blogDao.getBlogHeader(id);
-		BlogVo blogVo = blogDao.getBlog(id);
-		List<CategoryVo> cateList = cateDao.getCategory(id);
+		
 		Map<String, Object> blogMap = new HashMap<String, Object>();
-		blogMap.put("headerVo", headerVo);
-		blogMap.put("blogVo", blogVo);
-		blogMap.put("cateList", cateList);
+		blogMap.put("headerVo", blogDao.getBlogHeader(id));
+		blogMap.put("blogVo", blogDao.getBlog(id));
+		blogMap.put("cateList", cateDao.getCategory(id));
+		blogMap.put("postList", postDao.getPostList(id));
+		blogMap.put("postVo", postDao.getPost(id));
 		
 		return blogMap;
 	}
