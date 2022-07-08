@@ -28,16 +28,19 @@ public class BlogService {
 	private PostDao postDao;
 	
 	//블로그 정보 가져오기 (메인)
-	public Map<String, Object> getBlog(String id) {
+	public Map<String, Object> getBlog(String id, int cateNo, int postNo) {
 		System.out.println("BlogController->blogMain()");
 		
 		Map<String, Object> blogMap = new HashMap<String, Object>();
-		blogMap.put("headerVo", blogDao.getBlogHeader(id));
-		blogMap.put("blogVo", blogDao.getBlog(id));
-		blogMap.put("cateList", cateDao.getCategory(id));
-		blogMap.put("postList", postDao.getPostList(id));
-		blogMap.put("postVo", postDao.getPost(id));
-		
+		blogMap.put("headerVo", blogDao.getBlogHeader(id)); //헤더 (id, blogTitle)
+		blogMap.put("blogVo", blogDao.getBlog(id)); //블로그 (userName, logoFile)
+		blogMap.put("cateList", cateDao.getCategory(id)); //카테고리 (cateNo, cateName)
+		blogMap.put("postList", postDao.getPostList(cateNo)); //글제목 (postNo, cateNo, postTitle, regDate)
+		if(postNo == 0) {
+			blogMap.put("postVo", postDao.getRecentPost(cateNo)); //최신글 (postNo, postTitle, postContent, regDate)
+		} else {
+			blogMap.put("postVo", postDao.getPost(postNo)); //본문 (postNo, postTitle, postContent, regDate)
+		}
 		return blogMap;
 	}
 

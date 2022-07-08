@@ -21,9 +21,11 @@ public class BlogController {
 	
 	//블로그 메인화면
 	@RequestMapping(value="/{id}", method= {RequestMethod.POST, RequestMethod.GET})
-	public String blogMain(Model model, @PathVariable String id) {
+	public String blogMain(Model model, @PathVariable String id,
+							@RequestParam(value="cateNo", required=false, defaultValue="0") int cateNo,
+							@RequestParam(value="postNo", required=false, defaultValue="0") int postNo) {
 		System.out.println("BlogController->blogMain()");
-		Map<String, Object> blogMap = blogService.getBlog(id);
+		Map<String, Object> blogMap = blogService.getBlog(id, cateNo, postNo);
 		model.addAttribute("blogMap", blogMap);
 		return "blog/blog-main";
 	}

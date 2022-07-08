@@ -40,7 +40,7 @@
 					</div>
 					<ul id="cateList" class="text-left">
 						<c:forEach items="${blogMap.cateList }" var="cateVo">
-							<li><a href="$}">${cateVo.cateName }</a></li>
+							<li><a href="${pageContext.request.contextPath }/${blogMap.headerVo.id }?cateNo=${cateVo.cateNo}">${cateVo.cateName }</a></li>
 						</c:forEach>
 					</ul>
 				</div>
@@ -85,7 +85,7 @@
 						
 						<c:forEach items="${blogMap.postList }" var="postVo">
 							<tr>
-								<td class="text-left"><a href="">${postVo.postTitle }</a></td>
+								<td class="text-left"><a href="${pageContext.request.contextPath }/${blogMap.headerVo.id }?cateNo=${postVo.cateNo }&postNo=${postVo.postNo}">${postVo.postTitle }</a></td>
 								<td class="text-right">${postVo.regDate }</td>
 							</tr>
 						</c:forEach>
