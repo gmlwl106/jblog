@@ -12,7 +12,7 @@
 	</insert>
 	
 	<!-- (블로그메인) 글 제목 가져오기 -->
-	<select id="getList" parameterType="int" resultType="postVo">
+	<select id="getList" parameterType="hashMap" resultType="postVo">
 		<![CDATA[
 			select  postNo
 			        ,p.cateNo
@@ -20,8 +20,9 @@
 			        ,to_char(p.regDate, 'YYYY/MM/DD') regDate
 			from category c, post p
 			where c.cateNo = p.cateNo
+			and c.id = #{id}
 		]]>
-		<if test="value != 0 and value != null">
+		<if test="cateNo != 0">
 			and c.cateNo = #{cateNo}
 		</if>
 		<![CDATA[
@@ -30,7 +31,7 @@
 	</select>
 	
 	<!-- (블로그메인) 최신글 가져오기 -->
-	<select id="getRecentPost" parameterType="int" resultType="postVo">
+	<select id="getRecentPost" parameterType="hashMap" resultType="postVo">
 		<![CDATA[
 			select postNo
 			        ,postTitle
@@ -40,8 +41,9 @@
 			where regDate = (select max(p.regDate)
 			                from post p, category c
 			                where c.cateNo = p.cateNo
+			                and c.id = #{id}
 		]]>
-		<if test="value != 0 and value != null">
+		<if test="cateNo != 0">
 			                and c.cateNo = #{cateNo}
 		</if>
 		<![CDATA[

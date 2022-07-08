@@ -35,9 +35,9 @@ public class BlogService {
 		blogMap.put("headerVo", blogDao.getBlogHeader(id)); //헤더 (id, blogTitle)
 		blogMap.put("blogVo", blogDao.getBlog(id)); //블로그 (userName, logoFile)
 		blogMap.put("cateList", cateDao.getCategory(id)); //카테고리 (cateNo, cateName)
-		blogMap.put("postList", postDao.getPostList(cateNo)); //글제목 (postNo, cateNo, postTitle, regDate)
+		blogMap.put("postList", postDao.getPostList(id, cateNo)); //글제목 (postNo, cateNo, postTitle, regDate)
 		if(postNo == 0) {
-			blogMap.put("postVo", postDao.getRecentPost(cateNo)); //최신글 (postNo, postTitle, postContent, regDate)
+			blogMap.put("postVo", postDao.getRecentPost(id, cateNo)); //최신글 (postNo, postTitle, postContent, regDate)
 		} else {
 			blogMap.put("postVo", postDao.getPost(postNo)); //본문 (postNo, postTitle, postContent, regDate)
 		}
