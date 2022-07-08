@@ -18,6 +18,12 @@ public class BlogDao {
 		return sqlSession.insert("blog.insert", id);
 	}
 	
+	//블로그 헤더(blogTitle, id) 가져오기
+	public BlogVo getBlogHeader(String id) {
+		System.out.println("BlogDao->getBlogHeader()");
+		return sqlSession.selectOne("blog.getHeader", id);
+	}
+	
 	//블로그 정보 가져오기
 	public BlogVo getBlog(String id) {
 		System.out.println("BlogDao->getBlog()");
@@ -29,4 +35,5 @@ public class BlogDao {
 		System.out.println("BlogDao->blogUpdate()");
 		return sqlSession.update("blog.update", blogVo);
 	}
+
 }

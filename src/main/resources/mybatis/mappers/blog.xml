@@ -11,12 +11,20 @@
 		]]>
 	</insert>
 	
-	<!-- 블로그 정보 가져오기 -->
+	<!-- 블로그 헤더 가져오기 (id, blogTitle) -->
+	<select id="getHeader" parameterType="String" resultType="blogVo">
+		<![CDATA[
+			select  id
+			        ,blogTitle
+			from blog
+			where id = #{id}
+		]]>
+	</select>
+	
+	<!-- 블로그 정보 가져오기 (userName, logoFile) -->
 	<select id="getBlog" parameterType="String" resultType="blogVo">
 		<![CDATA[
 			select  u.userName
-			        ,b.id
-			        ,blogTitle
 			        ,logoFile
 			from users u, blog b
 			where u.id = b.id

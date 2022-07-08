@@ -35,7 +35,7 @@
 						</colgroup>
 			      		<tr>
 			      			<td><label for="textTitle">블로그 제목</label></td>
-			      			<td><input id="textTitle" type="text" name="blogTitle" value="${blogMap.blogVo.blogTitle }"></td>
+			      			<td><input id="textTitle" type="text" name="blogTitle" value="${blogMap.headerVo.blogTitle }"></td>
 			      		</tr>
 			      		<tr>
 			      			<td><label>로고이미지</label></td>

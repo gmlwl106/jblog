@@ -1,6 +1,7 @@
 package com.javaex.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,8 @@ public class CategoryController {
 	@RequestMapping(value="/{id}/admin/category", method= {RequestMethod.POST, RequestMethod.GET})
 	public String adminCategoryForm(Model model, @PathVariable String id) {
 		System.out.println("CategoryController->adminCategoryForm()");
+		Map<String, Object> blogMap = cateService.getHeader(id);
+		model.addAttribute("blogMap", blogMap);
 		return "blog/admin/blog-admin-cate";
 	}
 	

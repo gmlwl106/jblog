@@ -1,6 +1,6 @@
 package com.javaex.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.javaex.service.PostService;
-import com.javaex.vo.CategoryVo;
 import com.javaex.vo.PostVo;
 
 @Controller
@@ -24,8 +23,8 @@ public class PostController {
 	@RequestMapping(value="/{id}/admin/writeForm", method= {RequestMethod.GET, RequestMethod.POST})
 	public String adminWriteForm(Model model, @PathVariable String id) {
 		System.out.println("PostController->adminWriteForm()");
-		List<CategoryVo> cateList = postService.getCategory(id);
-		model.addAttribute("cateList", cateList);
+		Map<String, Object> blogMap = postService.getCategory(id);
+		model.addAttribute("blogMap", blogMap);
 		return "blog/admin/blog-admin-write";
 	}
 	

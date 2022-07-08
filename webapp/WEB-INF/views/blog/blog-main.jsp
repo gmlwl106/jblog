@@ -21,17 +21,18 @@
 			<div id="profilecate_area">
 				<div id="profile">
 					
-					<c:if test="${blogMap.blogVo.logoFile == null || blogMap.blogVo.logoFile == '' }">
-						<!-- 기본이미지 -->
-						<img id="proImg" src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
-					</c:if>
+					<c:choose>
+						<c:when test="${blogMap.blogVo.logoFile == null || blogMap.blogVo.logoFile == '' }">
+							<!-- 기본이미지 -->
+							<img id="proImg" src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
+						</c:when>
+						<c:otherwise>
+							<!-- 사용자업로드 이미지 -->
+							<img id="proImg" src="${pageContext.request.contextPath }/upload/${blogMap.blogVo.logoFile }">
+						</c:otherwise>
+					</c:choose>
 					
-					<c:if test="${blogMap.blogVo.logoFile != null || blogMap.blogVo.logoFile != '' }">
-						<!-- 사용자업로드 이미지 -->
-						<img id="proImg" src="${pageContext.request.contextPath }/upload/${blogMap.blogVo.logoFile }">
-					</c:if>
-					
-					<div id="nick">${blogMap.blogVo.userName }(${blogMap.blogVo.id })</div>
+					<div id="nick">${blogMap.blogVo.userName }(${blogMap.headerVo.id })</div>
 				</div>
 				<div id="cate">
 					<div class="text-left">

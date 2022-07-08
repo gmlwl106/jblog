@@ -29,9 +29,11 @@ public class BlogService {
 	//블로그 정보 가져오기 (메인)
 	public Map<String, Object> getBlog(String id) {
 		System.out.println("BlogController->blogMain()");
+		BlogVo headerVo = blogDao.getBlogHeader(id);
 		BlogVo blogVo = blogDao.getBlog(id);
 		List<CategoryVo> cateList = cateDao.getCategory(id);
 		Map<String, Object> blogMap = new HashMap<String, Object>();
+		blogMap.put("headerVo", headerVo);
 		blogMap.put("blogVo", blogVo);
 		blogMap.put("cateList", cateList);
 		
@@ -42,7 +44,9 @@ public class BlogService {
 	public Map<String, Object> getBlogSet(String id) {
 		System.out.println("BlogController->getBlogSet()");
 		Map<String, Object> blogMap = new HashMap<String, Object>();
+		BlogVo headerVo = blogDao.getBlogHeader(id);
 		BlogVo blogVo = blogDao.getBlog(id);
+		blogMap.put("headerVo", headerVo);
 		blogMap.put("blogVo", blogVo);
 		return blogMap;
 	}

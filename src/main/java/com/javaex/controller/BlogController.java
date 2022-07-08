@@ -18,7 +18,7 @@ public class BlogController {
 	
 	@Autowired
 	private BlogService blogService;
-
+	
 	//블로그 메인화면
 	@RequestMapping(value="/{id}", method= {RequestMethod.POST, RequestMethod.GET})
 	public String blogMain(Model model, @PathVariable String id) {

@@ -20,9 +20,9 @@
 
 		<div id="content">
 			<ul id="admin-menu" class="clearfix">
-				<li class="tabbtn selected"><a href="${pageContext.request.contextPath }/${authUser.id }/admin/basic">기본설정</a></li>
+				<li class="tabbtn"><a href="${pageContext.request.contextPath }/${authUser.id }/admin/basic">기본설정</a></li>
 				<li class="tabbtn"><a href="${pageContext.request.contextPath }/${authUser.id }/admin/category">카테고리</a></li>
-				<li class="tabbtn"><a href="${pageContext.request.contextPath }/${authUser.id }/admin/writeForm">글작성</a></li>
+				<li class="tabbtn selected"><a href="${pageContext.request.contextPath }/${authUser.id }/admin/writeForm">글작성</a></li>
 			</ul>
 			<!-- //admin-menu -->
 			
@@ -42,7 +42,7 @@
 				      		<td>
 				      			<select name="cateNo">
 				      				<!-- 카테고리 리스트 영역 -->
-				      				<c:forEach items="${cateList }" var="cateVo">
+				      				<c:forEach items="${blogMap.cateList }" var="cateVo">
 					      				<option value="${cateVo.cateNo }">${cateVo.cateName }</option>
 				      				</c:forEach>
 				      				<!-- 카테고리 리스트 영역 -->
