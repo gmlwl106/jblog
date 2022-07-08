@@ -7,7 +7,7 @@
 	<insert id="insert" parameterType="String">
 		<![CDATA[
 			insert into blog
-			values(#{id}, #{id}||'의 블로그입니다.', '')
+			values(#{id}, #{id}||'의 블로그입니다.', 'assets/images/spring-logo.jpg')
 		]]>
 	</insert>
 	

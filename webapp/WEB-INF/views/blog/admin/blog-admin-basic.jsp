@@ -39,12 +39,7 @@
 			      		</tr>
 			      		<tr>
 			      			<td><label>로고이미지</label></td>
-			      			<c:if test="${blogMap.blogVo.logoFile == null || blogMap.blogVo.logoFile == ''}">
-			      				<td class="text-left"><img src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg"></td>   
-			      			</c:if>
-			      			<c:if test="${blogMap.blogVo.logoFile != null || blogMap.blogVo.logoFile != ''}">
-			      				<td class="text-left"><img src="${pageContext.request.contextPath }/upload/${blogMap.blogVo.logoFile }"></td>
-			      			</c:if>
+		      				<td class="text-left"><img src="${pageContext.request.contextPath }/${blogMap.blogVo.logoFile }"></td>
 			      		</tr>      		
 			      		<tr>
 			      			<td>&nbsp;</td>

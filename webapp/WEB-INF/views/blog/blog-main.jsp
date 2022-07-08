@@ -21,17 +21,9 @@
 			<div id="profilecate_area">
 				<div id="profile">
 					
-					<c:choose>
-						<c:when test="${blogMap.blogVo.logoFile == null || blogMap.blogVo.logoFile == '' }">
-							<!-- 기본이미지 -->
-							<img id="proImg" src="${pageContext.request.contextPath}/assets/images/spring-logo.jpg">
-						</c:when>
-						<c:otherwise>
-							<!-- 사용자업로드 이미지 -->
-							<img id="proImg" src="${pageContext.request.contextPath }/upload/${blogMap.blogVo.logoFile }">
-						</c:otherwise>
-					</c:choose>
-					
+					<!-- 사용자업로드 이미지 -->
+					<img id="proImg" src="${pageContext.request.contextPath }/${blogMap.blogVo.logoFile }">
+						
 					<div id="nick">${blogMap.blogVo.userName }(${blogMap.headerVo.id })</div>
 				</div>
 				<div id="cate">
@@ -74,6 +66,16 @@
 						</div>
 					</c:otherwise>
 				</c:choose>
+				
+				<div id="comment">
+					<table>
+						<tr>
+							<td>${authUser.id }</td>
+							<td><input type="text" name="cmt"></td>
+							<td><button id="cmtBtn">저장</button>
+						</tr>
+					</table>
+				</div>
 				
 				<div id="list">
 					<div id="listTitle" class="text-left"><strong>카테고리의 글</strong></div>

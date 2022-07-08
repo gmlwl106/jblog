@@ -75,7 +75,7 @@ public class BlogService {
 		BlogVo blogVo = new BlogVo();
 		blogVo.setId(id);
 		blogVo.setBlogTitle(blogTitle);
-		blogVo.setLogoFile(saveName);
+		blogVo.setLogoFile("upload/" + saveName);
 		
 		//DB 저장
 		int count = blogDao.blogUpdate(blogVo);
