@@ -87,7 +87,7 @@ a:hover {text-decoration: none; color: #000000; }
 
 /* 메인-푸터 */
 #center-content #footer {height: 40px; padding:0px 10px 0px 10px; background:#F0F0F0; }
-#center-content #footer li {margin-right: 20px; paddign: 10px; float: left; font-size: 13px;  line-height:40px;}
+#center-content #footer li {margin-right: 20px; padding: 10px; float: left; font-size: 13px;  line-height:40px;}
 div#footer		{ color:#666 }
 
 

@@ -31,7 +31,6 @@ public class CategoryService {
 	public CategoryVo categoryAdd(CategoryVo cateVo) {
 		System.out.println("CategoryService->categoryAdd()");
 		int count = cateDao.categoryInsert(cateVo);
-		System.out.println(cateVo.getCateNo());
 		return cateDao.getCategoryOne(cateVo.getCateNo());
 	}
 

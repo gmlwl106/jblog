@@ -91,12 +91,7 @@
 							<col style="width: 50px;">
 							<col style="width: 10px;">
 						</colgroup>
-						<tr>
-							<td>박깜이</td>
-							<td align="left">안녕하세요 반가워요 (^0^)/</td>
-							<td>2022/07/08</td>
-							<td><img class="btnCateDel" src="${pageContext.request.contextPath}/assets/images/delete.jpg"></td>
-						</tr>
+						
 					</table>
 				</div>
 				
@@ -139,7 +134,40 @@
 	$(document).ready(function() {
 		console.log("ready");
 		
+		/* 리스트 그리기 */
+		fetchList();
 	});
+	
+	/* 코멘트 리스트 요청 */
+	function fetchList() {
+		console.log("fetchList");
+		
+		var postNo = "${blogMap.postVo.postNo}";
+		console.log(postNo);
+		
+		$.ajax({
+			//보낼때
+			url : "${pageContext.request.contextPath }/${blogMap.headerVo.id }/comments",
+			type : "post",
+			//contentType : "application/json",
+			data : {postNo},
+			
+			//받을때
+			dataType : "json",
+			success : function(cmtList){
+				/*성공시 처리해야될 코드 작성*/
+				console.log(cmtList);
+				
+				//화면 data + html 그린다
+				for(var i=0; i<cmtList.length; i++) {
+					render(cmtList[i]);
+				}
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+	}
 	
 	
 	/* 코멘트 저장 클릭 */
@@ -156,7 +184,42 @@
 				cmtContent: cmtContent
 		};
 		
-		console.log(commentVo);
+		
+		$.ajax({
+			url : "${pageContext.request.contextPath }/${blogMap.headerVo.id }/cmtUpload",
+			type : "post",
+			//contentType : "application/json",
+			data : commentVo,
+			//dataType : "json",
+			success : function(cmtVo){
+				//성공시 처리해야될 코드 작성
+				console.log(cmtVo);
+				
+				render(cmtVo);
+
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
 	});
+	
+	
+	/* 코멘트 그리기 */
+	function render(cmtVo) {
+		console.log("render");
+		
+		var str = "";
+		
+		str += "<tr>";
+		str += "	<td>"+cmtVo.userName+"</td>";
+		str += "	<td align='left'>"+cmtVo.cmtContent+"</td>";
+		str += "	<td>"+cmtVo.regDate+"</td>";
+		str += "	<td><img class='btnCateDel' src='${pageContext.request.contextPath}/assets/images/delete.jpg'></td>";
+		str += "</tr>";
+		
+		
+		$("#cmtRead").prepend(str);
+	}
 </script>
 </html>
