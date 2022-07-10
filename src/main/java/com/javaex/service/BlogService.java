@@ -59,8 +59,7 @@ public class BlogService {
 	public int blogModify(String id, String blogTitle, MultipartFile file) {
 		System.out.println("BlogController->blogModify()");
 		
-		//String saveDir = "D:\\javaStudy\\upload"; //집
-		String saveDir = "C:\\javaStudy\\upload"; //학원
+		String saveDir = "C:\\javaStudy\\upload";
 		
 		//오리지날 파일명
 		String orgName = file.getOriginalFilename();
