@@ -216,9 +216,11 @@
 		str += "	<td><b>"+cmtVo.userName+"</b></td>";
 		str += "	<td align='left'>"+cmtVo.cmtContent+"</td>";
 		str += "	<td>"+cmtVo.regDate+"</td>";
+		str += "	<td>";
 		if("${authUser.userNo}" == cmtVo.userNo) {
-			str += "	<td><img data-no='"+cmtVo.cmtNo+"' class='btnCmtDel' src='${pageContext.request.contextPath}/assets/images/delete.jpg'></td>";
+			str += "	<img data-no='"+cmtVo.cmtNo+"' class='btnCmtDel' src='${pageContext.request.contextPath}/assets/images/delete.jpg'>";
 		}
+		str += "	</td>";
 		str += "</tr>";
 		
 		
