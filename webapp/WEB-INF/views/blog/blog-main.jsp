@@ -95,6 +95,7 @@
 						
 					</table>
 				</div>
+				<!-- //comment -->
 				
 				
 				<div id="list">
@@ -112,6 +113,13 @@
 							</tr>
 						</c:forEach>
 					</table>
+					
+					<div id="paging">
+						<ul>
+						
+						</ul>
+					</div>
+					<!-- //paging -->
 				</div>
 				<!-- //list -->
 			</div>
@@ -121,7 +129,6 @@
 			
 		</div>	
 		<!-- //content -->
-		<div class=></div>
 		
 		<!-- 개인블로그 푸터 -->
 		<c:import url="/WEB-INF/views/includes/blog-footer.jsp"></c:import>
