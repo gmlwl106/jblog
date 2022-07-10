@@ -24,8 +24,19 @@ public class CommentService {
 	public CommentVo cmtUpload(CommentVo cmtVo) {
 		System.out.println("CommentService->cmtUpload");
 		cmtDao.cmtInsert(cmtVo);
-		System.out.println(cmtVo.getCmtNo());
 		return cmtDao.getComment(cmtVo.getCmtNo());
+	}
+
+	//코멘트 삭제
+	public String cmtDelete(int cmtNo) {
+		System.out.println("CommentService->cmtDelete");
+		int count = cmtDao.cmtDelete(cmtNo);
+		
+		if(count > 0) {
+			return "success";
+		} else {
+			return "fail";
+		}
 	}
 
 

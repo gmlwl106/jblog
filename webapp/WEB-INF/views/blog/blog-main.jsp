@@ -91,6 +91,7 @@
 							<col style="width: 50px;">
 							<col style="width: 10px;">
 						</colgroup>
+						<!-- 코멘트가 나오는 부분 -->
 						
 					</table>
 				</div>
@@ -211,15 +212,49 @@
 		
 		var str = "";
 		
-		str += "<tr>";
-		str += "	<td>"+cmtVo.userName+"</td>";
+		str += "<tr id='cmt"+cmtVo.cmtNo+"'>";
+		str += "	<td><b>"+cmtVo.userName+"</b></td>";
 		str += "	<td align='left'>"+cmtVo.cmtContent+"</td>";
 		str += "	<td>"+cmtVo.regDate+"</td>";
-		str += "	<td><img class='btnCateDel' src='${pageContext.request.contextPath}/assets/images/delete.jpg'></td>";
+		if("${authUser.userNo}" == cmtVo.userNo) {
+			str += "	<td><img data-no='"+cmtVo.cmtNo+"' class='btnCmtDel' src='${pageContext.request.contextPath}/assets/images/delete.jpg'></td>";
+		}
 		str += "</tr>";
 		
 		
 		$("#cmtRead").prepend(str);
 	}
+	
+	
+	$("#cmtRead").on("click", ".btnCmtDel", function() {
+		console.log("삭제버튼");
+		
+		var $this = $(this);
+		var cmtNo = $this.data("no");
+		
+		$.ajax({
+			//보낼때
+			url : "${pageContext.request.contextPath }/${blogMap.headerVo.id }/cmtDelete",
+			type : "post",
+			//contentType : "application/json",
+			data : {cmtNo},
+			
+			//받을때
+			//dataType : "json",
+			success : function(result){
+				/*성공시 처리해야될 코드 작성*/
+				console.log(result);
+
+				if(result == "success") {
+					$("#cmt"+cmtNo).remove();
+				} else {
+					alert('삭제할 수 없습니다.');
+				}
+			},
+			error : function(XHR, status, error) {
+				console.error(status + " : " + error);
+			}
+		});
+	});
 </script>
 </html>

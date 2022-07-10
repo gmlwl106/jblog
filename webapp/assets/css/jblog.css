@@ -188,7 +188,7 @@ div#footer		{ color:#666 }
 
 
 /* 개인블로그 코멘트영역 */
-#comment #cmtRead td	{padding: 10px 10px 10px 10px;}
+#comment #cmtRead td	{padding: 10px 10px 10px 10px; border-bottom: 1px solid #b7b7b7;}
 
 
 

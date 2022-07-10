@@ -15,7 +15,7 @@
 			from comments c, users u
 			where c.userNo = u.userNo
 			and postNo = #{postNo}
-			order by regDate
+			order by c.regDate
 		]]>
 	</select>
 
@@ -44,4 +44,12 @@
 			and cmtNo = #{cmtNo}
 		]]>
 	</select>
+	
+	<!-- 코멘트 삭제 -->
+	<delete id="delete" parameterType="int">
+		<![CDATA[
+			delete comments
+			where cmtNo = #{cmtNo}
+		]]>
+	</delete>
 </mapper>

@@ -212,7 +212,7 @@
 				if(result == "success") {
 					$("#cate"+no).remove();
 				} else {
-					alert('삭제할 수 없습니다.'); //나중에 확인!
+					alert('삭제할 수 없습니다.');
 				}
 			},
 			error : function(XHR, status, error) {

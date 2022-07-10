@@ -35,4 +35,12 @@ public class CommentController {
 		System.out.println("CommentConroller->cmtUpload");
 		return cmtService.cmtUpload(cmtVo);
 	}
+	
+	//코멘트 삭제
+	@ResponseBody
+	@RequestMapping(value="/{id}/cmtDelete", method = {RequestMethod.GET, RequestMethod.POST})
+	public String cmtDelete(@RequestParam("cmtNo") int cmtNo) {
+		System.out.println("CommentConroller->cmtDelete");
+		return cmtService.cmtDelete(cmtNo);
+	}
 }

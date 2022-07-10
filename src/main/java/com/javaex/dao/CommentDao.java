@@ -33,5 +33,11 @@ public class CommentDao {
 		return sqlSession.selectOne("comments.getComment", cmtNo);
 	}
 
+	//코멘트 삭제
+	public int cmtDelete(int cmtNo) {
+		System.out.println("CommentDao->cmtDelete()");
+		return sqlSession.delete("comments.delete", cmtNo);
+	}
+
 
 }
