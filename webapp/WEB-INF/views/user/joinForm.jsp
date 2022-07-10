@@ -101,7 +101,47 @@
 				console.error(status + " : " + error);
 			}
 		});
+	});
+	
+	
+	/* 회원가입 버튼 클릭 했을때 (입력여부 확인) */
+	$("#joinForm").on("submit", function() {
+		console.log("submit");
+		var id = $("#txtId").val();
+		var idCk = $("#tdMsg").text();
+		var pw = $("#txtPassword").val();
+		var name = $("#txtUserName").val();
+		var agree = $("#chkAgree").is(":checked");
+
 		
+		//아이디 체크
+		if(id == "" || id == null) {
+			alert("아이디를 입력해주세요");
+			return false;
+		} else {
+			if(idCk == "다른 아이디로 가입해 주세요." || idCk == "" || idCk == null) {
+				alert("아이디 중복체크를 해주세요");
+				return false;
+			}
+		}
+		
+		//비밀번호 체크
+		if(pw == "" || pw == null) {
+			alert("비밀번호를 입력해주세요");
+			return false;
+		}
+		
+		//이름 체크
+		if(name == "" || name == null) {
+			alert("이름을 입력해주세요");
+			return false;
+		}
+		
+		//약관동의 체크
+		if(agree == false) {
+			alert("약관에 동의해 주세요");
+			return false;
+		}
 	});
 
 </script>
