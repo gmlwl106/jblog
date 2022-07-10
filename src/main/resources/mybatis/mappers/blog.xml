@@ -41,4 +41,29 @@
 			where id = #{id}
 		]]>
 	</update>
+	
+	<!-- 블로그 검색하기 -->
+	<select id="select" parameterType="hashMap" resultType="blogVo">
+		<![CDATA[
+			select  userNo
+			        ,u.id
+			        ,userName
+			        ,joinDate
+			        ,blogTitle
+			        ,logoFile
+			from users u, blog b
+			where u.id = b.id
+		]]>
+		<choose>
+			<when test="kwdOpt == optTitle">
+				and blogTitle like '%'||#{keyword}||'%'
+			</when>
+			<when test="kwdOpt == optName">
+				and userName like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+		<![CDATA[
+			order by joinDate
+		]]>
+	</select>
 </mapper>
