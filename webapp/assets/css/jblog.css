@@ -199,6 +199,23 @@ div#footer		{ color:#666 }
 #post_area #list table tr {border-bottom: 1px solid #B7B7B7; }
 #post_area #list table td {padding: 6px 5px 6px 5px; }
 
+/* 페이징 */
+#post_area #list #paging {
+	margin: 0px auto;
+	width: 310px;
+}
+
+#post_area #list #paging ul {margin: 10px 5px 10px 5px;}
+#post_area #list #paging ul>li{
+	float: left;
+	margin: 0px 5px 0px 5px;
+}
+
+#post_area #list #paging ul>li.active{
+	font-size: 14px;
+	font-weight: bold;
+}
+
 
 /****************************************************************/
 /* 개인블로그 어드민 ***************************************************/

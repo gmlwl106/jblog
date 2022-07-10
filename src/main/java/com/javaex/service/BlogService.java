@@ -28,19 +28,58 @@ public class BlogService {
 	private PostDao postDao;
 	
 	//블로그 정보 가져오기 (메인)
-	public Map<String, Object> getBlog(String id, int cateNo, int postNo) {
+	public Map<String, Object> getBlog(String id, int cateNo, int postNo, int crtPage) {
 		System.out.println("BlogController->blogMain()");
+
+		
+		//페이징============================================================================
+		//페이지당 글 갯수
+		int listCnt = 5;
+		//현재페이지
+		crtPage = (crtPage>0)? crtPage : (crtPage=1);
+		//시작번호
+		int startRnum = (crtPage-1)*listCnt+1;
+		//끝번호
+		int endRnum = (startRnum+listCnt)-1;
+		
+		//글 갯수
+		int totalCnt = postDao.selectCnt(id, cateNo);
+		//페이지당 버튼 갯수
+		int pageBtnCnt = 5;
+		//마지막 버튼 번호
+		int endPageBtnNo = (int)Math.ceil(crtPage / (double)pageBtnCnt)*pageBtnCnt;
+		//시작 버튼 번호
+		int startPageBtnNo = (endPageBtnNo-pageBtnCnt) + 1;
+		//다음 화살표 유무
+		boolean next = false;
+		if((listCnt*endPageBtnNo) < totalCnt) {
+			next = true;
+		} else {
+			endPageBtnNo = (int)Math.ceil(totalCnt/(double)listCnt);
+		}
+		//이전 화살표 유무
+		boolean prev = false;
+		if(startPageBtnNo != 1) {
+			prev = true;
+		}
+		//페이징============================================================================
+		
+		
 		
 		Map<String, Object> blogMap = new HashMap<String, Object>();
 		blogMap.put("headerVo", blogDao.getBlogHeader(id)); //헤더 (id, blogTitle)
 		blogMap.put("blogVo", blogDao.getBlog(id)); //블로그 (userName, logoFile)
 		blogMap.put("cateList", cateDao.getCategory(id)); //카테고리 (cateNo, cateName)
-		blogMap.put("postList", postDao.getPostList(id, cateNo)); //글제목 (postNo, cateNo, postTitle, regDate)
+		blogMap.put("postList", postDao.getPostList(startRnum, endRnum, id, cateNo)); //글제목 (postNo, cateNo, postTitle, regDate)
 		if(postNo == 0) {
 			blogMap.put("postVo", postDao.getRecentPost(id, cateNo)); //최신글 (postNo, postTitle, postContent, regDate)
 		} else {
 			blogMap.put("postVo", postDao.getPost(postNo)); //본문 (postNo, postTitle, postContent, regDate)
 		}
+		blogMap.put("prev", prev); //이전 화살표
+		blogMap.put("next", next); //다음 화살표
+		blogMap.put("startPageBtnNo", startPageBtnNo); //시작 번호
+		blogMap.put("endPageBtnNo", endPageBtnNo); //마지막 번호
 		return blogMap;
 	}
 

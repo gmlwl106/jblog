@@ -23,9 +23,11 @@ public class PostDao {
 	}
 
 	//(블로그메인) 글 제목 가져오기
-	public List<PostVo> getPostList(String id, int cateNo) {
+	public List<PostVo> getPostList(int startRnum, int endRnum, String id, int cateNo) {
 		System.out.println("PostDao->getPostList()");
 		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("startRnum", startRnum);
+		map.put("endRnum", endRnum);
 		map.put("id", id);
 		map.put("cateNo", cateNo);
 		return sqlSession.selectList("post.getList", map);
@@ -44,6 +46,15 @@ public class PostDao {
 	public PostVo getPost(int postNo) {
 		System.out.println("PostDao->getPost()");
 		return sqlSession.selectOne("post.getPost", postNo);
+	}
+
+	//글 갯수
+	public int selectCnt(String id, int cateNo) {
+		System.out.println("PostDao->selectTotalCnt()");
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("cateNo", cateNo);
+		return sqlSession.selectOne("post.selectCnt", map);
 	}
 
 }

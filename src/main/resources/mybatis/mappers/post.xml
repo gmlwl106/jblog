@@ -14,20 +14,46 @@
 	<!-- (블로그메인) 글 제목 가져오기 -->
 	<select id="getList" parameterType="hashMap" resultType="postVo">
 		<![CDATA[
-			select  postNo
-			        ,p.cateNo
-			        ,postTitle
-			        ,to_char(p.regDate, 'YYYY/MM/DD') regDate
-			from category c, post p
-			where c.cateNo = p.cateNo
-			and c.id = #{id}
+			select  ort.rn
+			        ,ort.postNo
+			        ,ort.cateNo
+			        ,ort.postTitle
+			        ,ort.regDate
+			from (select  rownum rn
+			            ,ot.postNo
+			            ,ot.cateNo
+			            ,ot.postTitle
+			            ,ot.regDate
+			    from (select  postNo
+			                    ,p.cateNo
+			                    ,postTitle
+			                    ,to_char(p.regDate, 'YYYY/MM/DD') regDate
+			            from category c, post p
+			            where c.cateNo = p.cateNo
+			            and c.id = #{id}
+			            ]]>
+					<if test="cateNo != 0">
+						and c.cateNo = #{cateNo}
+					</if>
+		<![CDATA[
+			            order by p.regDate desc)ot
+			    )ort
+			where rn >= #{startRnum}
+			and rn <= #{endRnum}
 		]]>
+	</select>
+	
+	<!-- (페이징) 글 갯수 가져오기 -->
+	<select id="selectCnt" parameterType="hashMap" resultType="int">
+		<![CDATA[
+			select count(*)
+			from category c, post p
+            where c.cateNo = p.cateNo
+            and c.id = #{id}
+            ]]>
 		<if test="cateNo != 0">
 			and c.cateNo = #{cateNo}
 		</if>
-		<![CDATA[
-			order by p.regDate desc
-		]]>
 	</select>
 	
 	<!-- (블로그메인) 최신글 가져오기 -->
