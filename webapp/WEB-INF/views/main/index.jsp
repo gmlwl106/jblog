@@ -54,6 +54,7 @@
 			
 			<div id="paging">
 				<ul>
+				<c:if test="${bMap.bList != null }">
 					<c:if test="${bMap.prev eq true }">
 						<li><a href="${pageContext.request.contextPath }/search?keyword=${param.keyword }&kwdOpt=${param.kwdOpt }&crtPage=${bMap.startPageBtnNo-1}">◀</a></li>
 					</c:if>
@@ -72,6 +73,7 @@
 					<c:if test="${bMap.next eq true }">
 						<li><a href="${pageContext.request.contextPath }/search?keyword=${param.keyword }&kwdOpt=${param.kwdOpt }&crtPage=${bMap.endPageBtnNo+1 }">▶</a></li>
 					</c:if>
+				</c:if>
 				</ul>
 			</div>
 			

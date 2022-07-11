@@ -37,7 +37,11 @@
 		<![CDATA[
 			update blog
 			set blogTitle = #{blogTitle}
+		]]>
+		<if test="logoFile != null">
 				,logoFile = #{logoFile}
+		</if>
+		<![CDATA[
 			where id = #{id}
 		]]>
 	</update>

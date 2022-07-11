@@ -13,7 +13,6 @@ public class BlogVo {
 	public BlogVo() {
 	}
 	public BlogVo(String id, String blogTitle, String logoFile, String userName, String joinDate) {
-		super();
 		this.id = id;
 		this.blogTitle = blogTitle;
 		this.logoFile = logoFile;

@@ -29,7 +29,7 @@ public class BlogService {
 	
 	//블로그 정보 가져오기 (메인)
 	public Map<String, Object> getBlog(String id, int cateNo, int postNo, int crtPage) {
-		System.out.println("BlogController->blogMain()");
+		System.out.println("BlogService->blogMain()");
 
 		
 		//페이징============================================================================
@@ -64,8 +64,7 @@ public class BlogService {
 		}
 		//페이징============================================================================
 		
-		
-		
+
 		Map<String, Object> blogMap = new HashMap<String, Object>();
 		blogMap.put("headerVo", blogDao.getBlogHeader(id)); //헤더 (id, blogTitle)
 		blogMap.put("blogVo", blogDao.getBlog(id)); //블로그 (userName, logoFile)
@@ -85,7 +84,7 @@ public class BlogService {
 
 	//블로그 정보 가져오기 (내블로그 관리)
 	public Map<String, Object> getBlogSet(String id) {
-		System.out.println("BlogController->getBlogSet()");
+		System.out.println("BlogService->getBlogSet()");
 		Map<String, Object> blogMap = new HashMap<String, Object>();
 		BlogVo headerVo = blogDao.getBlogHeader(id);
 		BlogVo blogVo = blogDao.getBlog(id);
@@ -96,42 +95,53 @@ public class BlogService {
 
 	//블로그 기본설정 수정
 	public int blogModify(String id, String blogTitle, MultipartFile file) {
-		System.out.println("BlogController->blogModify()");
+		System.out.println("BlogService->blogModify()"+file);
+
 		
 		String saveDir = "C:\\javaStudy\\upload";
-		
-		//오리지날 파일명
-		String orgName = file.getOriginalFilename();
-		//확장자
-		String exName = orgName.substring(orgName.lastIndexOf("."));
-		//현재시간+랜덤UUID+확장자
-		String saveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
-		
-		//파일경로(디렉토리+저장파일명)
-		String filePath = saveDir + "\\" + saveName;
-		
 		BlogVo blogVo = new BlogVo();
-		blogVo.setId(id);
-		blogVo.setBlogTitle(blogTitle);
-		blogVo.setLogoFile("upload/" + saveName);
+		int count;
 		
-		//DB 저장
-		int count = blogDao.blogUpdate(blogVo);
-		
-		//파일 저장
-		try {
+		if(file.getSize() > 0) {
+			//오리지날 파일명
+			String orgName = file.getOriginalFilename();
+			//확장자
+			String exName = orgName.substring(orgName.lastIndexOf("."));
+			//현재시간+랜덤UUID+확장자
+			String saveName = System.currentTimeMillis() + UUID.randomUUID().toString() + exName;
 			
-			byte[] fileData = file.getBytes();
-			OutputStream os = new FileOutputStream(filePath);
-			BufferedOutputStream bos = new BufferedOutputStream(os);
-			
-			bos.write(fileData);
-			bos.close();
+			//파일경로(디렉토리+저장파일명)
+			String filePath = saveDir + "\\" + saveName;
 			
 			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			blogVo.setId(id);
+			blogVo.setBlogTitle(blogTitle);
+			blogVo.setLogoFile("upload/" + saveName);
+			
+			//DB 저장
+			count = blogDao.blogUpdate(blogVo);
+			
+			//파일 저장
+			try {
+				
+				byte[] fileData = file.getBytes();
+				OutputStream os = new FileOutputStream(filePath);
+				BufferedOutputStream bos = new BufferedOutputStream(os);
+				
+				bos.write(fileData);
+				bos.close();
+				
+				
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} else {
+			blogVo.setId(id);
+			blogVo.setBlogTitle(blogTitle);
+			
+			//DB 저장
+			count = blogDao.blogUpdate(blogVo);
 		}
 		
 		return count;

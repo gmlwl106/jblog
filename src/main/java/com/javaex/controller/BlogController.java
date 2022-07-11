@@ -43,7 +43,7 @@ public class BlogController {
 	//블로그 기본설정 수정
 	@RequestMapping(value="/{id}/admin/blogModify", method= {RequestMethod.POST, RequestMethod.GET})
 	public String blogModify(@PathVariable String id,
-							@RequestParam("file") MultipartFile file,
+							@RequestParam(value="file") MultipartFile file,
 							@RequestParam("blogTitle") String blogTitle) {
 		System.out.println("BlogController->blogModify()");
 		blogService.blogModify(id, blogTitle, file);
