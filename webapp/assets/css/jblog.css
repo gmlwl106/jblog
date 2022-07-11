@@ -110,6 +110,12 @@ div#footer		{ color:#666 }
 #center-content #resultList table td {border:2px solid #b7b7b7;}
 #center-content #resultList img {width:50px;}
 
+/* 페이징 */
+#resultList #paging 				{margin: 0px auto; width: 310px;}
+#resultList #paging ul 			{margin: 10px 5px 10px 5px;}
+#resultList #paging ul>li			{float: left;	margin: 0px 5px 0px 5px;}
+#resultList #paging ul>li.active	{font-size: 14px; font-weight: bold;}
+
 
 /**************************************************************************/
 /* 메인-회원가입_로그인 ***************************************************/
@@ -203,21 +209,10 @@ div#footer		{ color:#666 }
 #post_area #list table td {padding: 6px 5px 6px 5px; }
 
 /* 페이징 */
-#post_area #list #paging {
-	margin: 0px auto;
-	width: 310px;
-}
-
+#post_area #list #paging {margin: 0px auto;	width: 310px;}
 #post_area #list #paging ul {margin: 10px 5px 10px 5px;}
-#post_area #list #paging ul>li{
-	float: left;
-	margin: 0px 5px 0px 5px;
-}
-
-#post_area #list #paging ul>li.active{
-	font-size: 14px;
-	font-weight: bold;
-}
+#post_area #list #paging ul>li{	float: left;margin: 0px 5px 0px 5px;}
+#post_area #list #paging ul>li.active{font-size: 14px;font-weight: bold;}
 
 
 /****************************************************************/

@@ -42,7 +42,7 @@
 					<col style="width:100px;">
 				</colgroup>
 				
-				<c:forEach items="${bList }" var="blogVo">
+				<c:forEach items="${bMap.bList }" var="blogVo">
 				<tr>
 					<td><img id="proImg" src="${pageContext.request.contextPath }/${blogVo.logoFile}"></td>
 					<td><a href="${pageContext.request.contextPath }/${blogVo.id}">${blogVo.blogTitle }</a></td>
@@ -51,6 +51,29 @@
 				</tr>
 				</c:forEach>
 			</table>
+			
+			<div id="paging">
+				<ul>
+					<c:if test="${bMap.prev eq true }">
+						<li><a href="${pageContext.request.contextPath }/search?keyword=${param.keyword }&kwdOpt=${param.kwdOpt }&crtPage=${bMap.startPageBtnNo-1}">◀</a></li>
+					</c:if>
+					
+					<c:forEach begin="${bMap.startPageBtnNo }" end="${bMap.endPageBtnNo }" step="1" var="page">
+						<c:choose>
+							<c:when test="${param.crtPage eq page }">
+								<li class="active"><a href="${pageContext.request.contextPath }/search?keyword=${param.kwdOpt }&kwdOpt=${param.keyword }&crtPage=${page }">${page }</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a href="${pageContext.request.contextPath }/search?keyword=${param.keyword }&kwdOpt=${param.kwdOpt }&crtPage=${page }">${page }</a></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>							
+
+					<c:if test="${bMap.next eq true }">
+						<li><a href="${pageContext.request.contextPath }/search?keyword=${param.keyword }&kwdOpt=${param.kwdOpt }&crtPage=${bMap.endPageBtnNo+1 }">▶</a></li>
+					</c:if>
+				</ul>
+			</div>
 			
 		</div>
 		

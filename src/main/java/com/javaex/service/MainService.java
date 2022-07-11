@@ -18,7 +18,7 @@ public class MainService {
 
 
 	//블로그 검색
-	public List<BlogVo> blogSearch(String keyword, String kwdOpt, int crtPage) {
+	public Map<String, Object> blogSearch(String keyword, String kwdOpt, int crtPage) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("keyword", keyword);
 		map.put("kwdOpt", kwdOpt);
@@ -57,8 +57,14 @@ public class MainService {
 		
 		map.put("startRnum", startRnum);
 		map.put("endRnum", endRnum);
-		
 		List<BlogVo> bList = blogDao.blogSelect(map);
-		return null;
+		
+		Map<String, Object> bMap = new HashMap<String, Object>();
+		bMap.put("bList", bList);
+		bMap.put("startPageBtnNo", startPageBtnNo);
+		bMap.put("endPageBtnNo", endPageBtnNo);
+		bMap.put("prev", prev);
+		bMap.put("next", next);
+		return bMap;
 	}
 }

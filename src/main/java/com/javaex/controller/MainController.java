@@ -1,6 +1,6 @@
 package com.javaex.controller;
 
-import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.javaex.service.MainService;
-import com.javaex.vo.BlogVo;
 
 @Controller
 public class MainController {
@@ -29,8 +28,8 @@ public class MainController {
 							@RequestParam("keyword") String keyword,
 							@RequestParam(value="kwdOpt", required = false, defaultValue = "optTitle") String kwdOpt,
 							@RequestParam(value="crtPage", required = false, defaultValue = "1") int crtPage) {
-		List<BlogVo> bList = mainService.blogSearch(keyword, kwdOpt, crtPage);
-		model.addAttribute("bList", bList);
+		Map<String, Object> bMap = mainService.blogSearch(keyword, kwdOpt, crtPage);
+		model.addAttribute("bMap", bMap);
 		return "main/index";
 	}
 }
