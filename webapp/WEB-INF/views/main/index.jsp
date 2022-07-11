@@ -8,7 +8,6 @@
 <meta charset="UTF-8">
 <title>JBlog</title>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/jblog.css">
-<script type="text/javascript" src="${pageContext.request.contextPath }/assets/js/jquery/jquery-1.12.4.js"></script>
 
 </head>
 <body>
@@ -18,7 +17,7 @@
 		<c:import url="/WEB-INF/views/includes/main-header.jsp"></c:import>
 		
 		
-		<form id="search-form">
+		<form id="search-form" action="${pageContext.request.contextPath }/search" method="get">
 			<fieldset>
 				<input type="text" name="keyword" >
 				<button id="btnSearch" type="submit" >검색</button>
@@ -43,6 +42,14 @@
 					<col style="width:100px;">
 				</colgroup>
 				
+				<c:forEach items="${bList }" var="blogVo">
+				<tr>
+					<td><img id="proImg" src="${pageContext.request.contextPath }/${blogVo.logoFile}"></td>
+					<td><a href="${pageContext.request.contextPath }/${blogVo.id}">${blogVo.blogTitle }</a></td>
+					<td>${blogVo.userName }(${blogVo.id })</td>
+					<td>${blogVo.joinDate }</td>
+				</tr>
+				</c:forEach>
 			</table>
 			
 		</div>
@@ -56,57 +63,5 @@
 	<!-- //center-content -->
 </body>
 
-<script type="text/javascript">
-	
-	/* 검색 버튼 클릭했을 때 */
-	$("#btnSearch").on("click", function() {
-		var keyword = $("[name=keyword]").val();
-		var kwdOpt = $("[name=kwdOpt]:checked").val();
 
-		var kwd = {
-				keyword: keyword,
-				kwdOpt: kwdOpt
-		}
-		
-		$.ajax({
-			//보낼때
-			url : "${pageContext.request.contextPath }/blogSearch",
-			type : "post",
-			//contentType : "application/json",
-			data : kwd,
-			
-			//받을때
-			dataType : "json",
-			success : function(blogList){
-				/*성공시 처리해야될 코드 작성*/
-				console.log(blogList);
-				
-				//화면 data + html 그린다
-				for(var i=0; i<blogList.length; i++) {
-					render(blogList[i]);
-				}
-			},
-			error : function(XHR, status, error) {
-				console.error(status + " : " + error);
-			}
-		});
-	})
-	
-	
-
-	function render(blogVo) {
-		console.log("render");
-		
-		var str = "";
-		str += "<tr>";
-		str += "<td><img id='proImg' src='${pageContext.request.contextPath }/"+blogVo.logoFile+"'></td>";
-		str += "<td><a href='${pageContext.request.contextPath }/"+blogVo.id+"'>"+blogVo.blogTitle+"</a></td>";
-		str += "<td>"+blogVo.userName+"("+blogVo.id+")</td>";
-		str += "<td>"+blogVo.joinDate+"</td>";
-		str += "</tr>";
-		
-		$("#result-list").append(str);
-	}
-
-</script>
 </html>

@@ -40,8 +40,13 @@ public class BlogDao {
 	}
 
 	//(메인) 블로그 검색
-	public List<BlogVo> blogSelect(Map<String, String> map) {
+	public List<BlogVo> blogSelect(Map<String, Object> map) {
 		return sqlSession.selectList("blog.select", map);
+	}
+
+	//(메인) 블로그 갯수
+	public int getBlogCnt(Map<String, Object> map) {
+		return sqlSession.selectOne("blog.getCnt", map);
 	}
 
 }

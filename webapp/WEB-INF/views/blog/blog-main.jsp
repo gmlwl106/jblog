@@ -122,13 +122,13 @@
 							
 							<c:forEach begin="${blogMap.startPageBtnNo }" end="${blogMap.endPageBtnNo }" step="1" var="page">
 								<c:choose>
-										<c:when test="${param.crtPage eq page }">
-											<li class="active"><a href="${pageContext.request.contextPath }/${blogMap.headerVo.id }?crtPage=${page }">${page }</a></li>
-										</c:when>
-										<c:otherwise>
-											<li><a href="${pageContext.request.contextPath }/${blogMap.headerVo.id }?crtPage=${page }">${page }</a></li>
-										</c:otherwise>
-									</c:choose>
+									<c:when test="${param.crtPage eq page }">
+										<li class="active"><a href="${pageContext.request.contextPath }/${blogMap.headerVo.id }?crtPage=${page }">${page }</a></li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="${pageContext.request.contextPath }/${blogMap.headerVo.id }?crtPage=${page }&cateNo=${param.cateNo}">${page }</a></li>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>							
 
 							<c:if test="${blogMap.next eq true }">
@@ -221,6 +221,7 @@
 				console.log(cmtVo);
 				
 				render(cmtVo);
+				$("#cmtTxt").val("");
 
 			},
 			error : function(XHR, status, error) {

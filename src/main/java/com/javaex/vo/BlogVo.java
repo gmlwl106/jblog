@@ -6,20 +6,24 @@ public class BlogVo {
 	private String blogTitle;
 	private String logoFile;
 	private String userName;
+	private String joinDate;
 	
 	
 	
 	public BlogVo() {
 	}
-	public BlogVo(String id, String blogTitle, String logoFile, String userName) {
+	public BlogVo(String id, String blogTitle, String logoFile, String userName, String joinDate) {
+		super();
 		this.id = id;
 		this.blogTitle = blogTitle;
 		this.logoFile = logoFile;
 		this.userName = userName;
+		this.joinDate = joinDate;
 	}
-	
-	
-	
+
+
+
+
 	public String getId() {
 		return id;
 	}
@@ -44,13 +48,19 @@ public class BlogVo {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+	public String getJoinDate() {
+		return joinDate;
+	}
+	public void setJoinDate(String joinDate) {
+		this.joinDate = joinDate;
+	}
 	
 	
 	@Override
 	public String toString() {
 		return "BlogVo [id=" + id + ", blogTitle=" + blogTitle + ", logoFile=" + logoFile + ", userName=" + userName
-				+ "]";
+				+ ", joinDate=" + joinDate + "]";
 	}
+	
 	
 }

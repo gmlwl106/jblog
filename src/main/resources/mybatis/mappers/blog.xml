@@ -42,7 +42,7 @@
 		]]>
 	</update>
 	
-	<!-- 블로그 검색하기 -->
+	<!-- (메인) 블로그 검색하기 -->
 	<select id="select" parameterType="hashMap" resultType="blogVo">
 		<![CDATA[
 			select  userNo
@@ -55,10 +55,30 @@
 			where u.id = b.id
 		]]>
 		<choose>
-			<when test="kwdOpt == optTitle">
+			<when test='kwdOpt == "optTitle"'>
 				and blogTitle like '%'||#{keyword}||'%'
 			</when>
-			<when test="kwdOpt == optName">
+			<when test='kwdOpt == "optName"'>
+				and userName like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+		<![CDATA[
+			order by joinDate
+		]]>
+	</select>
+	
+	<!-- (메인) 블로그 갯수 -->
+	<select id="getCnt" parameterType="hashMap" resultType="int">
+		<![CDATA[
+			select  count(*)
+			from users u, blog b
+			where u.id = b.id
+		]]>
+		<choose>
+			<when test='kwdOpt == "optTitle"'>
+				and blogTitle like '%'||#{keyword}||'%'
+			</when>
+			<when test='kwdOpt == "optName"'>
 				and userName like '%'||#{keyword}||'%'
 			</when>
 		</choose>
