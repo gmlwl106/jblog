@@ -46,6 +46,7 @@ public class BlogController {
 							@RequestParam(value="file") MultipartFile file,
 							@RequestParam("blogTitle") String blogTitle) {
 		System.out.println("BlogController->blogModify()");
+		System.out.println(file);
 		blogService.blogModify(id, blogTitle, file);
 		return "redirect:/"+id+"/admin/basic";
 	}
